@@ -325,6 +325,13 @@ ENFORCE_SYSTEM_CERTIFICATE_WHITELIST := $(PRODUCT_ARTIFACT_SYSTEM_CERTIFICATE_RE
 
 PRODUCT_OTA_PUBLIC_KEYS := $(sort $(PRODUCT_OTA_PUBLIC_KEYS))
 PRODUCT_EXTRA_RECOVERY_KEYS := $(sort $(PRODUCT_EXTRA_RECOVERY_KEYS))
+# A list of property assignments, like "key = value", with zero or more
+# whitespace characters on either side of the '='.
+# used for overriding properties in build.prop
+PRODUCT_BUILD_PROP_OVERRIDES := \
+    $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_PROP_OVERRIDES))
+.KATI_READONLY := PRODUCT_BUILD_PROP_OVERRIDES
+
 
 # Resolve and setup per-module dex-preopt configs.
 DEXPREOPT_DISABLED_MODULES :=
