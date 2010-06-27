@@ -151,6 +151,11 @@ _product_list_vars += PRODUCT_PROPERTY_OVERRIDES
 
 # A list of property assignments, like "key = value", with zero or more
 # whitespace characters on either side of the '='.
+# used for overriding properties in build.prop
+_product_var_list += PRODUCT_BUILD_PROP_OVERRIDES
+
+# A list of property assignments, like "key = value", with zero or more
+# whitespace characters on either side of the '='.
 # used for adding properties to default.prop
 _product_list_vars += PRODUCT_DEFAULT_PROPERTY_OVERRIDES
 
