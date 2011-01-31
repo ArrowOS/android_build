@@ -604,6 +604,11 @@ function print_lunch_menu()
        echo "... and don't forget the bacon!"
     fi
 
+    if [ "z${ARROW_DEVICES_ONLY}" != "z" ]; then
+       echo " "
+       echo "... and don't forget the bacon!"
+    fi
+
     echo
 }
 
