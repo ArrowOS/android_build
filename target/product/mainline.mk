@@ -24,14 +24,18 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_product.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_product.mk)
 
-ifeq ($(LINEAGE_BUILD),)
+ifeq ($(ARROW_BUILD),)
 $(call inherit-product, frameworks/base/data/sounds/AllAudio.mk)
 else
 $(call inherit-product, frameworks/base/data/sounds/AudioPackage14.mk)
 endif
 
+ifeq ($(ARROW_BUILD),)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=Ring_Synth_04.ogg \
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dataroaming=true \
 
 PRODUCT_PACKAGES += \
