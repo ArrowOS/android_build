@@ -319,6 +319,8 @@ ifneq ($(ARROW_BUILD),)
 include vendor/arrow/config/BoardConfigArrow.mk
 endif
 
+-include vendor/extra/BoardConfigExtra.mk
+
 # The build system exposes several variables for where to find the kernel
 # headers:
 #   TARGET_DEVICE_KERNEL_HEADERS is automatically created for the current
