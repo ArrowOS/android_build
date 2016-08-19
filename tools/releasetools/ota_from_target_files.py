@@ -846,9 +846,26 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
+<<<<<<< HEAD   (df8745 build: Add support for device tree in boot.img)
   # All other partitions as well as the data wipe use 10% of the progress, and
   # the update of the system partition takes the remaining progress.
   system_progress = 0.9 - (len(block_diff_dict) - 1) * 0.1
+=======
+  CopyInstallTools(output_zip)
+  script.UnpackPackageDir("install", "/tmp/install")
+  script.SetPermissionsRecursive("/tmp/install", 0, 0, 0755, 0644, None, None)
+  script.SetPermissionsRecursive("/tmp/install/bin", 0, 0, 0755, 0755, None, None)
+
+  if OPTIONS.backuptool:
+    script.Mount("/system")
+    script.Print("BackupTools: starting backup script")
+    script.RunBackup("backup")
+    script.Print("BackupTools: DONE! Now real installation will begin")
+    script.Unmount("/system")
+
+  system_progress = 0.75
+
+>>>>>>> CHANGE (1d9eb5 Installation script: advise the user that BackupTools is run)
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
   progress_dict = {partition: 0.1 for partition in block_diff_dict}
@@ -876,6 +893,20 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   common.CheckSize(boot_img.data, "boot.img", target_info)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
+<<<<<<< HEAD   (df8745 build: Add support for device tree in boot.img)
+=======
+  device_specific.FullOTA_PostValidate()
+
+  if OPTIONS.backuptool:
+    script.ShowProgress(0.02, 10)
+    script.Mount("/system")
+    script.Print("BackupTools: Restoring backup")
+    script.RunBackup("restore")
+    script.Print("BackupTools: DONE!")
+    script.Unmount("/system")
+
+  script.ShowProgress(0.05, 5)
+>>>>>>> CHANGE (1d9eb5 Installation script: advise the user that BackupTools is run)
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 10)
