@@ -315,6 +315,10 @@ include $(BUILD_SYSTEM)/envsetup.mk
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 
+ifneq ($(ARROW_BUILD),)
+include vendor/arrow/config/BoardConfigArrow.mk
+endif
+
 -include vendor/extra/BoardConfigExtra.mk
 
 # The build system exposes several variables for where to find the kernel
@@ -1165,6 +1169,17 @@ dont_bother_goals := out \
 # Make ANDROID Soong config variables visible to Android.mk files, for
 # consistency with those defined in BoardConfig.mk files.
 include $(BUILD_SYSTEM)/android_soong_config_vars.mk
+
+ifneq ($(ARROW_BUILD),)
+ifneq ($(wildcard device/arrow/sepolicy/common/sepolicy.mk),)
+## We need to be sure the global selinux policies are included
+## last, to avoid accidental resetting by device configs
+$(eval include device/arrow/sepolicy/common/sepolicy.mk)
+endif
+endif
+
+# Include any vendor specific config.mk file
+-include vendor/*/build/core/config.mk
 
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ninja_config.mk
