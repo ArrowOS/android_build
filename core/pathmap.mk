@@ -93,3 +93,7 @@ FRAMEWORKS_BASE_SUBDIRS := \
 #
 FRAMEWORKS_BASE_JAVA_SRC_DIRS := \
 	$(addprefix frameworks/base/,$(FRAMEWORKS_BASE_SUBDIRS))
+
+ifneq ($(ARROW_BUILD),)
+-include $(TOPDIR)vendor/arrow/build/core/pathmap.mk
+endif
