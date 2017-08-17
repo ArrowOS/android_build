@@ -1254,9 +1254,14 @@ ifneq ($(wildcard device/arrow/sepolicy/common/sepolicy.mk),)
 ## last, to avoid accidental resetting by device configs
 $(eval include device/arrow/sepolicy/common/sepolicy.mk)
 endif
+# Rules for QCOM targets
+-include $(TOPDIR)vendor/*/build/core/qcom_target.mk
+
+# Rules for MTK targets
+-include $(TOPDIR)vendor/*/build/core/mtk_target.mk
 endif
 
 # Include any vendor specific config.mk file
--include vendor/*/build/core/config.mk
+-include $(TOPDIR)vendor/*/build/core/config.mk
 
 include $(BUILD_SYSTEM)/dumpvar.mk
