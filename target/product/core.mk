@@ -51,6 +51,8 @@ PRODUCT_PACKAGES += \
     SharedStorageBackup \
     SimAppDialog \
     StorageManager \
+    SubstratumHelperService \
+    substratum-sysconfig.xml \
     Telecom \
     TeleService \
     Traceur \
@@ -63,6 +65,7 @@ PRODUCT_SYSTEM_SERVER_APPS += \
     FusedLocation \
     InputDevices \
     KeyChain \
+    SubstratumHelperService \
     Telecom \
 
 # The set of packages we want to force 'speed' compilation on.
