@@ -3205,6 +3205,15 @@ else
     OTA_SCRIPT_OVERRIDE_DEVICE := $(TARGET_OTA_ASSERT_DEVICE)
 endif
 
+ifndef ANDROID_COMPILE_WITH_BROTLI
+    ANDROID_COMPILE_WITH_BROTLI := true
+endif
+
+ifeq ($(ANDROID_COMPILE_WITH_BROTLI),true)
+    $(INTERNAL_OTA_PACKAGE_TARGET): brotli := true
+else
+    $(INTERNAL_OTA_PACKAGE_TARGET): brotli := false
+endif
 
 ifneq ($(ARROW_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
@@ -3222,6 +3231,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	   -p $(HOST_OUT) \
 	   -k $(KEY_CERT_PAIR) \
 	   --backup=$(backuptool) \
+	   --brotli=$(brotli) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
