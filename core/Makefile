@@ -408,6 +408,8 @@ endif
 # -----------------------------------------------------------------
 # vendor build.prop
 #
+# Prevent overwriting build.prop in system
+ifneq ($(TARGET_COPY_OUT_VENDOR),system)
 # For verifying that the vendor build is what we think it is
 INSTALLED_VENDOR_BUILD_PROP_TARGET := $(TARGET_OUT_VENDOR)/build.prop
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_VENDOR_BUILD_PROP_TARGET)
@@ -446,6 +448,7 @@ ifdef property_overrides_split_enabled
 	$(hide) $(foreach line,$(FINAL_VENDOR_BUILD_PROPERTIES), \
 		echo "$(line)" >> $@;)
 endif  # property_overrides_split_enabled
+endif  # TARGET_COPY_OUT_VENDOR=system
 	$(hide) build/make/tools/post_process_props.py $@ $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VENDOR_PROPERTY_BLACKLIST)
 
 # -----------------------------------------------------------------
