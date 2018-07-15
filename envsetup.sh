@@ -1813,3 +1813,60 @@ function repopick() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/repopick.py $@
 }
+
+aosp_url=https://android.googlesource.com/platform/manifest/+refs
+curl --output /tmp/tag_check.tmp $aosp_url --silent
+
+i=1
+version=$(get_build_var PLATFORM_VERSION)
+local_tag=`repo manifest | grep -i '<default remote="aosp" revision="refs/tags/android-' | sed 's/.*_r//' | cut -b 1-2`
+
+while true; do
+check_tag=$(($local_tag+i))
+grep -q -o android-"$version"_r$check_tag /tmp/tag_check.tmp 
+  if [[ $? -eq 0 ]]; then
+	echo "NOTE:"
+	echo "---------------------------------------------------------------"
+	echo "---------------------------------------------------------------"
+	echo "FOUND A NEW TAG($check_tag) FROM AOSP"
+	echo ""
+	echo "FEEL FREE TO MERGE THE TAG AND PUSH TO OUR GERRIT"
+	echo ""
+	echo ""
+	echo "Usage:"
+	echo "merge_tag  - Starts merging the latest tag"
+	echo "revert_tag - Reverts back all changes and repos to their heads"
+	echo "push_tag   - Pushes all the changes to gerrit"
+	echo ""
+	echo " "
+	echo "Additionally you can pass your own tag"
+	echo "merge_tag r50"
+	echo "---------------------------------------------------------------"
+        echo "---------------------------------------------------------------"
+  	break
+  else
+	if [[ i -eq 20 ]]; then
+		break
+	fi
+  	i=$((i+1))
+  fi
+done 
+
+function merge_tag()
+{
+	if [[ $# -eq 0 ]]; then
+		./merge-push.sh r"$check_tag"
+	else
+		./merge-push.sh $@
+	fi
+}
+
+function revert_tag()
+{
+	repo forall -vc "git reset --hard"
+}
+
+function push_tag()
+{
+	./merge-push.sh push
+}
