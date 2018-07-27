@@ -680,6 +680,7 @@ function lunch()
     fi
 
     check_product $product
+    if [ -z "${ARROW_OFFICIAL}" ]; then
     if [ $? -ne 0 ]
     then
         # if we can't find a product, try to grab it off the ArrowGitHub
@@ -693,6 +694,7 @@ function lunch()
         cd $T > /dev/null
         vendor/arrow/build/tools/roomservice.py $product true
         cd - > /dev/null
+    fi
     fi
 
     TARGET_PRODUCT=$product \
