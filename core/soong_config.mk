@@ -218,6 +218,8 @@ $(call add_json_bool, BoardUsesRecoveryAsBoot, $(BOARD_USES_RECOVERY_AS_BOOT))
 
 $(call json_end)
 
+include vendor/arrow/build/soong/soong_config.mk
+
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
 
 $(shell if ! cmp -s $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES); then \
