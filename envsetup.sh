@@ -733,7 +733,7 @@ function lunch()
 
     echo
 
-    fixup_common_out_dir
+    #fixup_common_out_dir
 
     set_stuff_for_environment
     printconfig
