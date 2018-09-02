@@ -228,10 +228,6 @@ FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 # be device and hardware independent.
 $(call project-set-path-variant,ril,TARGET_RIL_VARIANT,hardware/ril)
 
-ifneq ($(ARROW_BUILD),)
-include vendor/arrow/config/BoardConfigArrow.mk
-endif
-
 # The build system exposes several variables for where to find the kernel
 # headers:
 #   TARGET_DEVICE_KERNEL_HEADERS is automatically created for the current
