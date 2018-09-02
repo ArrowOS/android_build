@@ -820,6 +820,48 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
+  android_version = target_info.GetBuildProp("ro.build.version.release")
+  build_id = target_info.GetBuildProp("ro.build.id")
+  build_date = target_info.GetBuildProp("ro.arrow.build_date")
+  security_patch = target_info.GetBuildProp("ro.build.version.security_patch")
+  device = target_info.GetBuildProp("ro.product.device")
+
+  script.Print("=================================================");
+  script.Print("");
+  script.Print("                 ```````:````````                 ");
+  script.Print("             `````````.hMy```````````             ");
+  script.Print("          ```````````+NMMMs`````````````          ");
+  script.Print("        ```````````-hMMMMMMo``````````````        ");
+  script.Print("      ````````````+NMMMMMMMMo```````````````      ");
+  script.Print("     ```````````-hMMMMMMMMMMM+```````````````     ");
+  script.Print("    ```````````+NMMMMMMMMMMMMM+```````````````    ");
+  script.Print("   ``````````-hMMMMMMMMMMMMMMMM/```````````````   ");
+  script.Print("  ``````````+NMMMMMMMMMMMMMMMMMM/```````````````  ");
+  script.Print("  ````````-dMMMMNMMNMNMNMMMMMMMMN:``````````````  ");
+  script.Print("  ```````+NNNM+-````````:sMMMMMMMN:`````````````` ");
+  script.Print("  ``````/M-````````````````:yMMMMMN-````````````` ");
+  script.Print("  ```````````````````````````-sNMMMN-```````````` ");
+  script.Print("  `````````````````````````````.sNMMm-``````````  ");
+  script.Print("  ```````````````````````````````-yMMm-`````````  ");
+  script.Print("   ````````````````````````````````:dMm.```````   ");
+  script.Print("    `````````````````````````````````+Nd.`````    ");
+  script.Print("     `````````````````````````````````-hd.```     ");
+  script.Print("      ``````````````````````````````````+h.`      ");
+  script.Print("        `````````````````````````````````.o       ");
+  script.Print("          ``````````````````````````````   .      ");
+  script.Print("             ````````````````````````             ");
+  script.Print("                 ````````````````                 ");
+  script.Print("");
+  script.Print("                          ArrowOS");
+  script.Print("");
+  script.Print("=================================================");
+  script.Print(" Android version: %s"%(android_version));
+  script.Print(" Build id: %s"%(build_id));
+  script.Print(" Build date: %s"%(build_date));
+  script.Print(" Security patch: %s"%(security_patch));
+  script.Print(" Device: %s"%(device));
+  script.Print("=================================================");
+
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
