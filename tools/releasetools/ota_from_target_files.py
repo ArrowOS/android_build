@@ -956,7 +956,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if OPTIONS.backuptool:
     script.Mount("/system")
     script.Print("BackupTools: starting backup script")
-    script.RunBackup("backup")
+    script.RunBackup("backup", "/system/system")
     script.Print("BackupTools: DONE! Now real installation will begin")
     script.Unmount("/system")
 
@@ -1023,7 +1023,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.ShowProgress(0.02, 10)
     script.Mount("/system")
     script.Print("BackupTools: Restoring backup")
-    script.RunBackup("restore")
+    script.RunBackup("restore", "/system/system")
     script.Print("BackupTools: DONE!")
     script.Unmount("/system")
 
