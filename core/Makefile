@@ -364,16 +364,6 @@ endif
 			TARGET_AAPT_CHARACTERISTICS="$(TARGET_AAPT_CHARACTERISTICS)" \
 			$(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
-ifeq ($(TARGET_COPY_OUT_VENDOR),system)
-	$(hide) TARGET_DEVICE="$(TARGET_DEVICE)" \
-			PRODUCT_NAME="$(TARGET_PRODUCT)" \
-			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
-			PRODUCT_MODEL="$(PRODUCT_MODEL)" \
-			PRODUCT_MANUFACTURER="$(PRODUCT_MANUFACTURER)" \
-			TARGET_BOOTLOADER_BOARD_NAME="$(TARGET_BOOTLOADER_BOARD_NAME)" \
-			TARGET_BOARD_PLATFORM="$(TARGET_BOARD_PLATFORM)" \
-	        bash $(VENDOR_BUILDINFO_SH) >> $@
-endif
 	$(hide) $(foreach file,$(system_prop_file), \
 		if [ -f "$(file)" ]; then \
 			echo "#" >> $@; \
@@ -410,8 +400,6 @@ endif
 # -----------------------------------------------------------------
 # vendor build.prop
 #
-# Prevent overwriting build.prop in system
-ifneq ($(TARGET_COPY_OUT_VENDOR),system)
 # For verifying that the vendor build is what we think it is
 INSTALLED_VENDOR_BUILD_PROP_TARGET := $(TARGET_OUT_VENDOR)/build.prop
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_VENDOR_BUILD_PROP_TARGET)
@@ -423,11 +411,6 @@ FINAL_VENDOR_BUILD_PROPERTIES := $(call uniq-pairs-by-first-component, \
     $(FINAL_VENDOR_BUILD_PROPERTIES),=)
 endif  # property_overrides_split_enabled
 
-ifdef TARGET_VENDOR_PROP
-vendor_prop_file := $(TARGET_VENDOR_PROP)
-else
-vendor_prop_file := $(wildcard $(TARGET_DEVICE_DIR)/vendor.prop)
-endif
 $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(VENDOR_BUILDINFO_SH) $(intermediate_system_build_prop)
 	@echo Target vendor buildinfo: $@
 	@mkdir -p $(dir $@)
@@ -454,14 +437,6 @@ $(INSTALLED_VENDOR_BUILD_PROP_TARGET): $(VENDOR_BUILDINFO_SH) $(intermediate_sys
 			TARGET_BOOTLOADER_BOARD_NAME="$(TARGET_BOOTLOADER_BOARD_NAME)" \
 			TARGET_BOARD_PLATFORM="$(TARGET_BOARD_PLATFORM)" \
 	        bash $(VENDOR_BUILDINFO_SH) >> $@
-	$(hide) $(foreach file,$(vendor_prop_file), \
-		if [ -f "$(file)" ]; then \
-			echo "#" >> $@; \
-			echo Target buildinfo from: "$(file)"; \
-			echo "# from $(file)" >> $@; \
-			echo "#" >> $@; \
-			cat $(file) >> $@; \
-		fi;)
 ifdef property_overrides_split_enabled
 	$(hide) echo "#" >> $@; \
 	        echo "# ADDITIONAL VENDOR BUILD PROPERTIES" >> $@; \
@@ -469,7 +444,6 @@ ifdef property_overrides_split_enabled
 	$(hide) $(foreach line,$(FINAL_VENDOR_BUILD_PROPERTIES), \
 		echo "$(line)" >> $@;)
 endif  # property_overrides_split_enabled
-endif  # TARGET_COPY_OUT_VENDOR=system
 	$(hide) build/make/tools/post_process_props.py $@ $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VENDOR_PROPERTY_BLACKLIST)
 
 # -----------------------------------------------------------------
@@ -1682,18 +1656,6 @@ define create-system-vendor-symlink
 endef
 endif
 
-# Only Create symlink /system/vendor to /vendor if necessary.
-ifdef BOARD_NEEDS_VENDORIMAGE_SYMLINK
-define create-system-vendor-symlink
-$(hide) if [ -d $(TARGET_OUT)/vendor ] && [ ! -h $(TARGET_OUT)/vendor ]; then \
-  echo 'Non-symlink $(TARGET_OUT)/vendor detected!' 1>&2; \
-  echo 'You cannot install files to $(TARGET_OUT)/vendor while building a separate vendor.img!' 1>&2; \
-  exit 1; \
-fi
-$(hide) ln -sf /vendor $(TARGET_OUT)/vendor
-endef
-endif
-
 # Create symlink /system/product to /product if necessary.
 ifdef BOARD_USES_PRODUCTIMAGE
 define create-system-product-symlink
@@ -2192,10 +2154,8 @@ vendorimage-nodeps vnod: | $(INTERNAL_USERIMAGES_DEPS) $(DEPMOD)
 sync: $(INTERNAL_VENDORIMAGE_FILES)
 
 else ifdef BOARD_PREBUILT_VENDORIMAGE
-ifneq (true,$(BOARD_PREBUILT_VENDORIMAGE))
 INSTALLED_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 $(eval $(call copy-one-file,$(BOARD_PREBUILT_VENDORIMAGE),$(INSTALLED_VENDORIMAGE_TARGET)))
-endif
 endif
 
 # -----------------------------------------------------------------
@@ -3075,12 +3035,8 @@ ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
 endif
 	$(hide) echo "ota_override_device=$(OTA_SCRIPT_OVERRIDE_DEVICE)" >> $(zip_root)/META/misc_info.txt
 ifdef BOARD_PREBUILT_VENDORIMAGE
-ifeq (true,$(BOARD_PREBUILT_VENDORIMAGE))
-	$(hide) echo "vendor_prebuilt_installed=true" >> $(zip_root)/META/misc_info.txt
-else
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(INSTALLED_VENDORIMAGE_TARGET) $(zip_root)/IMAGES/
-endif
 endif
 ifdef BOARD_PREBUILT_PRODUCTIMAGE
 	$(hide) mkdir -p $(zip_root)/IMAGES
