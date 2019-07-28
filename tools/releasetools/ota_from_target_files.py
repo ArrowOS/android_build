@@ -880,7 +880,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("BackupTools: starting backup script")
     if is_system_as_root and common.system_as_system:
       script.RunBackup("backup", "/system/system")
+      script.Print("FUCK: this is SAR SHIT i DOI")
     else:
+      script.Print("NOICE: this is what i want, doing the shit")
       script.RunBackup("backup", "/system")
     script.Print("BackupTools: DONE! Now real installation will begin")
     script.Unmount(system_mount_point)
