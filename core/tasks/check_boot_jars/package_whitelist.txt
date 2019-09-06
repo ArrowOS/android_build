@@ -253,3 +253,6 @@ org\.codeaurora\.internal.*
 ##################################################
 # IFAA functionality
 org\.ifaa\.android\.manager.*
+
+vendor\.samsung\.hardware\.radio\.V1_2
+vendor\.mediatek\.hardware\.radio\.V2_0
