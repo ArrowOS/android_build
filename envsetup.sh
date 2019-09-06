@@ -1665,6 +1665,10 @@ validate_current_shell
 source_vendorsetup
 addcompletions
 
+# set ccache path on envsetup
+ccache_path=$(which ccache)
+export CCACHE_EXEC=$ccache_path
+
 export ANDROID_BUILD_TOP=$(gettop)
 
 function repopick() {
