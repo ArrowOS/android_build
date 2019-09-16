@@ -1915,7 +1915,11 @@ RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
 # $(1): output file
 define build-recoveryimage-target
   @echo "Generating Changelog"
-  $(hide) ./vendor/arrow/build/tools/changelog
+  MY_REPO_TOOL_PATH := \
+	PATH="$(BUILD_TOP)/vendor/arrow/build/tools:$$PATH"\
+	$(BUILD_TOP)/vendor/arrow/build/tools/changelog
+
+  $(hide) .$(MY_REPO_TOOL_PATH)
   $(hide) mv $(PRODUCT_OUT)/Changelog.txt $(PRODUCT_OUT)/$(TARGET_PRODUCT)-Changelog.txt
 
   $(if $(filter true,$(PRODUCT_SUPPORTS_VBOOT)), \
