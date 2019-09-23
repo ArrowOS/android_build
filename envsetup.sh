@@ -1687,3 +1687,9 @@ function repopick() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/repopick.py $@
 }
+
+function overlays() {
+    T=$(gettop)
+    $T/vendor/arrow/build/tools/overlays.sh
+}
+
