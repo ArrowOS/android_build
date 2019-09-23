@@ -574,7 +574,7 @@ function add_lunch_combo()
 function print_lunch_menu()
 {
     local uname=$(uname)
-
+    local choices=$(TARGET_BUILD_APPS= get_build_var COMMON_LUNCH_CHOICES)
     echo "You're building on" $uname
     if [ "$(uname)" = "Darwin" ] ; then
        echo "  (ohai, Ibish!)"
@@ -588,7 +588,7 @@ function print_lunch_menu()
 
     local i=1
     local choice
-    for choice in $(TARGET_BUILD_APPS= get_build_var COMMON_LUNCH_CHOICES)
+    for choice in $choices
     do
         echo " $i. $choice "
         i=$(($i+1))
