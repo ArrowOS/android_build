@@ -216,9 +216,9 @@ $(call add_json_bool, InstallExtraFlattenedApexes, $(PRODUCT_INSTALL_EXTRA_FLATT
 
 $(call add_json_bool, BoardUsesRecoveryAsBoot, $(BOARD_USES_RECOVERY_AS_BOOT))
 
-$(call json_end)
-
 include vendor/arrow/build/soong/soong_config.mk
+
+$(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
 
