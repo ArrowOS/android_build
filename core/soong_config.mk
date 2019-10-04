@@ -175,9 +175,9 @@ $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
   $(call end_json_map))
 $(call end_json_map)
 
-$(call json_end)
-
 include vendor/arrow/build/soong/soong_config.mk
+
+$(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
 
