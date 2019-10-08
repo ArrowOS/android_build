@@ -855,10 +855,10 @@ BOOT_RAMDISK_COMPRESSOR := $(MINIGZIP)
 RECOVERY_RAMDISK_COMPRESSOR := $(MINIGZIP)
 ifneq ($(LZMA_RAMDISK_TARGETS),)
   ifneq (,$(findstring boot,$(LZMA_RAMDISK_TARGETS)))
-    BOOT_RAMDISK_COMPRESSOR := lzma -f -c
+    BOOT_RAMDISK_COMPRESSOR := $(BUILD_TOP)/prebuilts/tools-extras/$(HOST_OS)-x86/bin/lzma -f -c
   endif
   ifneq (,$(findstring recovery,$(LZMA_RAMDISK_TARGETS)))
-    RECOVERY_RAMDISK_COMPRESSOR := lzma -f -c
+    RECOVERY_RAMDISK_COMPRESSOR := $(BUILD_TOP)/prebuilts/tools-extras/$(HOST_OS)-x86/bin/lzma -f -c
     TARGET_NOT_USE_GZIP_RECOVERY_RAMDISK := true
   endif
 endif
