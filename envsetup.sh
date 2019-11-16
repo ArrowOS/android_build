@@ -1686,3 +1686,4 @@ function overlays() {
     $T/vendor/arrow/build/tools/overlays.sh
 }
 
+bash $ANDROID_BUILD_TOP/packages/apps/FirefoxFocus/FirefoxFocus.sh
