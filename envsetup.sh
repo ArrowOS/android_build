@@ -735,6 +735,8 @@ function lunch()
 
     echo
 
+    fixup_common_out_dir
+
     set_stuff_for_environment
     printconfig
     destroy_build_var_cache
@@ -1684,6 +1686,27 @@ function repopick() {
 function overlays() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/overlays.sh
+}
+
+function fixup_common_out_dir() {
+    common_storage_path=${COMMON_OUT_STORAGE_PATH}
+    common_out_dir=$(get_build_var OUT_DIR)/target/common
+    target_device=$(get_build_var TARGET_DEVICE)
+    common_target_out=common-${target_device}
+    if [ ! -z $ARROW_FIXUP_COMMON_OUT ] && [ ! -z $commn_storage_path ]; then
+        if [ -d ${common_out_dir} ] && [ ! -L ${common_out_dir} ]; then
+            mv ${common_out_dir} ${common_storage_path}/${common_target_out}
+            ln -s ${common_storage_path}/${common_target_out} ${common_out_dir}
+        else
+            [ -L ${common_out_dir} ] && rm ${common_out_dir}
+            mkdir -p $(get_build_var OUT_DIR)/target
+            mkdir -p ${common_storage_path}/${common_target_out}
+            ln -s ${common_storage_path}/${common_target_out} ${common_out_dir}
+        fi
+    else
+        [ -L ${common_out_dir} ] && rm ${common_out_dir}
+        mkdir -p ${common_out_dir}
+    fi
 }
 
 bash $ANDROID_BUILD_TOP/packages/apps/DuckDuckGo/DuckDuckGo.sh
