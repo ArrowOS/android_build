@@ -1183,10 +1183,10 @@ DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages) $(kselftest_modules)
 .KATI_READONLY := DEFAULT_DATA_OUT_MODULES
 
 ifneq ($(ARROW_BUILD),)
-ifneq ($(wildcard vendor/arrow/sepolicy/common/sepolicy.mk),)
+ifneq ($(wildcard device/arrow/sepolicy/common/sepolicy.mk),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-$(eval include vendor/arrow/sepolicy/common/sepolicy.mk)
+$(eval include device/arrow/sepolicy/common/sepolicy.mk)
 endif
 endif
 
