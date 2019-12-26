@@ -1676,6 +1676,17 @@ if [ -z ${CCACHE_EXEC} ]; then
     fi
 fi
 
+# query and export the path of repo to REPO_EXEC which will be used by changelog generation script
+if [ -z ${REPO_EXEC} ]; then
+    repo_path=$(which repo)
+    if [ ! -z "$repo_path" ]; then
+        export REPO_EXEC="$repo_path"
+        echo -e "\e[32m\e[4mREPO_EXEC\e[0m \e[1mhas been set to : \e[4m$repo_path\e[0m"
+    else
+        echo -e "\e[31m\e[1mrepo not found/installed! Changelog will be empty\e[0m"
+    fi
+fi
+
 export ANDROID_BUILD_TOP=$(gettop)
 
 function repopick() {
