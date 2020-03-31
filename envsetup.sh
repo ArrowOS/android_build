@@ -798,6 +798,8 @@ function lunch()
     if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
       check_mu_config
     fi
+
+    arrow_prebuilts
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE
@@ -2005,4 +2007,11 @@ export ANDROID_BUILD_TOP=$(gettop)
 function repopick() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/repopick.py $@
+}
+
+function arrow_prebuilts() {
+    if [ -z ${ARROW_PREBUILTS} ]; then
+        bash $ANDROID_BUILD_TOP/packages/apps/ArrowPrebuilts/ArrowPrebuilts.sh
+        export ARROW_PREBUILTS=1
+    fi
 }
