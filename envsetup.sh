@@ -1698,3 +1698,5 @@ function arrow_set_product_out_dir() {
         ln -s ${product_storage_path}/${target_device} ${target_product_device}
     fi
 }
+
+bash $ANDROID_BUILD_TOP/packages/apps/ArrowPrebuilts/ArrowPrebuilts.sh
