@@ -1247,7 +1247,7 @@ DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages) $(kselftest_modules)
 ifneq ($(ARROW_BUILD),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-$(eval include device/arrow/sepolicy/common/sepolicy.mk)
+$(call inherit-product-if-exists, device/arrow/sepolicy/common/sepolicy.mk)
 endif
 
 # Include any vendor specific config.mk file
