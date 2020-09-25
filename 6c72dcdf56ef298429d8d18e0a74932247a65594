@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edfb12eb_fb390962",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1637,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2020-09-25T07:07:22Z",
+      "side": 1,
+      "message": "$ccache_path -o compression\u003dtrue",
+      "revId": "6c72dcdf56ef298429d8d18e0a74932247a65594",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196",
+      "unresolved": true
+    }
+  ]
+}
