@@ -5034,7 +5034,7 @@ INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
 ifneq ($(ARROW_BUILD),)
-    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
+    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
 endif
