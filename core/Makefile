@@ -5033,7 +5033,9 @@ name := $(name)-ota-$(FILE_NAME_TAG)
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
-ifneq ($(ARROW_BUILD),)
+ifeq ($(TARGET_DISABLE_BACKUPTOOL),true)
+    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
+else ifneq ($(ARROW_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
