@@ -1252,7 +1252,7 @@ ifneq ($(ARROW_BUILD),)
 ifneq ($(wildcard device/arrow/sepolicy/common/sepolicy.mk),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-$(eval include device/arrow/sepolicy/common/sepolicy.mk)
+-include device/arrow/sepolicy/common/sepolicy.mk
 endif
 endif
 
