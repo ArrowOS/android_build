@@ -1695,6 +1695,6 @@ function arrow_set_product_out_dir() {
         if [ ! -d ${target_product_device} ]; then
             mkdir -p ${target_product_device}
         fi
-        ln -s ${product_storage_path}/${target_device} ${target_product_device}
+        ln -s ${target_product_device} ${product_storage_path}/${target_device}
     fi
 }
