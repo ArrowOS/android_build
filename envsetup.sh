@@ -1692,8 +1692,8 @@ function arrow_set_product_out_dir() {
     target_product_device=$(get_build_var OUT_DIR)/target/product/${target_device}
 
     if [ ! -z $ARROW_SET_PRODUCT_OUT ] && [ ! -z ${product_storage_path} ]; then
-        if [ ! -d ${target_product_device} ]; then
-            mkdir -p ${target_product_device}
+        if [ ! -d ${product_storage_path}/${target_device} ]; then
+            mkdir -p ${product_storage_path}/${target_device}
         fi
         ln -s ${product_storage_path}/${target_device} ${target_product_device}
     fi
