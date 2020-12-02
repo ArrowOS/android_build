@@ -697,6 +697,7 @@ function lunch()
     echo
 
     fixup_common_out_dir
+    arrow_product_out_dir
 
     set_stuff_for_environment
     printconfig
@@ -1682,5 +1683,18 @@ function fixup_common_out_dir() {
     else
         [ -L ${common_out_dir} ] && rm ${common_out_dir}
         mkdir -p ${common_out_dir}
+    fi
+}
+
+function arrow_set_product_out_dir() {
+    product_storage_path="$ARROW_PRODUCT_OUT_STORAGE_PATH"
+    target_device=$(get_build_var TARGET_DEVICE)
+    target_product_device=$(get_build_var OUT_DIR)/target/product/${target_device}
+
+    if [ ! -z $ARROW_SET_PRODUCT_OUT ] && [ ! -z ${product_storage_path} ]; then
+        if [ ! -d ${target_product_device} ]; then
+            mkdir -p ${target_product_device}
+        fi
+        ln -s ${product_storage_path}/${target_device} ${target_product_device}
     fi
 }
