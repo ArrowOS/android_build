@@ -702,6 +702,8 @@ function lunch()
     set_stuff_for_environment
     printconfig
     destroy_build_var_cache
+
+    arrow_prebuilts
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE
@@ -1699,4 +1701,9 @@ function arrow_set_product_out_dir() {
     fi
 }
 
-bash $ANDROID_BUILD_TOP/packages/apps/ArrowPrebuilts/ArrowPrebuilts.sh
+function arrow_prebuilts() {
+    if [ -z ${ARROW_PREBUILTS} ]; then
+        bash $ANDROID_BUILD_TOP/packages/apps/ArrowPrebuilts/ArrowPrebuilts.sh
+        export ARROW_PREBUILTS=1
+    fi
+}
