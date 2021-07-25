@@ -18,6 +18,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_product.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_product.mk)
 
+ifeq ($(ARROW_BUILD),)
 # Default AOSP sounds
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
 
@@ -26,6 +27,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.ringtone=Ring_Synth_04.ogg \
     ro.config.notification_sound=pixiedust.ogg \
     ro.com.android.dataroaming=true \
+else
+$(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage14.mk)
+endif
 
 # More AOSP packages
 PRODUCT_PACKAGES += \
