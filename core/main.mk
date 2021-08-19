@@ -366,8 +366,11 @@ is_sdk_build := true
 endif
 
 ## user/userdebug ##
-
+ifeq ($(TARGET_FORCE_RO_DEBUGGABLE),true)
+user_variant := $(filter user userdebug,$(TARGET_BUILD_VARIANT))
+else
 user_variant := user
+endif
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 user_variant :=
 endif
