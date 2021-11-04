@@ -1880,6 +1880,10 @@ if [ -z ${CCACHE_EXEC} ]; then
     fi
 fi
 
+if [ -z ${CCACHE_DIR} ] && [ ! -z "$(which ccache)" ]; then
+    export CCACHE_DIR=${HOME}/.ccache
+fi
+
 export ANDROID_BUILD_TOP=$(gettop)
 
 function repopick() {
