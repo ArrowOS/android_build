@@ -1919,6 +1919,8 @@ fi
 
 export ANDROID_BUILD_TOP=$(gettop)
 
+export OVERRIDE_PRODUCT_COMPRESSED_APEX=false
+
 function repopick() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/repopick.py $@
