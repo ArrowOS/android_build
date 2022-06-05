@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef252c36_f6631338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 71
+      },
+      "writtenOn": "2022-06-05T11:10:03Z",
+      "side": 1,
+      "message": "Not need add signed-off for all commits if you only picked their.",
+      "revId": "dabda623c4303384856201d12b51aadb88dba27f",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
+    }
+  ]
+}
