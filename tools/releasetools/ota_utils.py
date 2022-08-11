@@ -40,7 +40,7 @@ OPTIONS.boot_variable_file = None
 METADATA_NAME = 'META-INF/com/android/metadata'
 METADATA_PROTO_NAME = 'META-INF/com/android/metadata.pb'
 UNZIP_PATTERN = ['IMAGES/*', 'INSTALL/*', 'META/*', 'OTA/*', 'RADIO/*']
-SECURITY_PATCH_LEVEL_PROP_NAME = "ro.build.version.security_patch"
+SECURITY_PATCH_LEVEL_PROP_NAME = "ro.build.version.real_security_patch"
 
 
 def FinalizeMetadata(metadata, input_file, output_file, needed_property_files):
