@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfcba3ab_053ea8f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2022-08-16T08:07:14Z",
+      "side": 1,
+      "message": "AOSP NFC can work on new NXP NFC stack, so this commit no longer needed.\nRef: https://github.com/Project-Kaleidoscope/android_build/commit/5d076848b8bcc9c4771199a56040814c09185bfe\nTested on lemonade with NXP NFC stack.",
+      "revId": "24c48e6085b1f8713bc68478ea76167b6dd93e65",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
+    }
+  ]
+}
