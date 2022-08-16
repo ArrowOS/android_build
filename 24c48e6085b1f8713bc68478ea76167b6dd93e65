@@ -50,6 +50,24 @@
       "message": "+ it will duplicate with nxp nfc stack.",
       "revId": "24c48e6085b1f8713bc68478ea76167b6dd93e65",
       "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7304c08_f4a3aafb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2022-08-16T08:39:24Z",
+      "side": 1,
+      "message": "The point of this is a device with NFC can handle this like with any other package.\nThere are so many Non NFC devices and shipping this package for everyone does not make sense.",
+      "parentUuid": "dfcba3ab_053ea8f7",
+      "revId": "24c48e6085b1f8713bc68478ea76167b6dd93e65",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
     }
   ]
 }
