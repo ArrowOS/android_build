@@ -33,6 +33,23 @@
       "message": "It can be enable in device tree. We have device without nfc support. Should be disabled in ROM sources.",
       "revId": "24c48e6085b1f8713bc68478ea76167b6dd93e65",
       "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9ae78b_b0cb2b5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 71
+      },
+      "writtenOn": "2022-08-16T08:37:19Z",
+      "side": 1,
+      "message": "+ it will duplicate with nxp nfc stack.",
+      "revId": "24c48e6085b1f8713bc68478ea76167b6dd93e65",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
     }
   ]
 }
