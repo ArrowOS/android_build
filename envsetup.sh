@@ -1150,7 +1150,6 @@ function systemstack()
 {
     stacks system_server
 }
-
 # Read the ELF header from /proc/$PID/exe to determine if the process is
 # 64-bit.
 function is64bit()
@@ -2027,4 +2026,55 @@ export ANDROID_BUILD_TOP=$(gettop)
 function repopick() {
     T=$(gettop)
     $T/vendor/arrow/build/tools/repopick.py $@
+}
+
+function gerritpush()
+{
+
+    GERRIT_URL=review.arrowos.net
+    DEFAULT_BRANCH=arrow-13.1
+    MANIFEST_PATH="$ANDROID_BUILD_TOP/manifest/arrow.xml"
+    PFX="ArrowOS/"
+    ref=for
+
+    while getopts "tdb" OPTION; do
+      case $OPTION in
+        t)
+                local USE_TOPIC="true"
+                ;;
+        d)
+                ref=heads
+                ;;
+        b)      local CUSTOM_BRANCH="true"
+                ;;
+      esac
+    done
+    if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+        echo "fatal: not a git repository"
+        return 1
+    fi
+    repo=$(git rev-parse --show-toplevel | sed "s|$ANDROID_BUILD_TOP/||g")
+    name=$(grep "path=\"$repo\"" $MANIFEST_PATH | sed -e 's/.*name="//' -e 's/".*//')
+    if [[ -z $name ]]; then
+        name=$(grep "name=\"$repo\"" $MANIFEST_PATH | sed -e 's/.*name="//' -e 's/".*//')
+    fi
+    if [[ -z $name ]]; then
+        echo "fatal: repo is not in arrow manifest"
+        return 1
+    fi
+    if [[ -z $ARROW_GERRIT_USER ]]; then
+      printf 'Enter gerrit username: '
+      read -r ARROW_GERRIT_USER
+    fi
+    export ARROW_GERRIT_USER
+    if [[ $CUSTOM_BRANCH == true ]]; then
+      printf 'Enter branch: '
+      read -r DEFAULT_BRANCH
+    fi
+    if [[ $USE_TOPIC == true ]]; then
+      printf 'Enter topic: '
+      read -r topic
+      local topic_sfx="%topic=$topic"
+    fi
+    git push ssh://$ARROW_GERRIT_USER@$GERRIT_URL:29418/$PFX$name HEAD:refs/$ref/$DEFAULT_BRANCH$topic_sfx
 }
