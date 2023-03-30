@@ -6273,37 +6273,8 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_
 $(call declare-1p-container,$(INTERNAL_OTA_PACKAGE_TARGET),)
 $(call declare-container-license-deps,$(INTERNAL_OTA_PACKAGE_TARGET),$(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_FILES) $(INTERNAL_OTATOOLS_FILES),$(PRODUCT_OUT)/:/)
 
-ARROW_TARGET_PACKAGE := $(PRODUCT_OUT)/$(ARROW_VERSION).zip
-
-.PHONY: otapackage bacon
+.PHONY: otapackage
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-bacon: otapackage
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(ARROW_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(ARROW_TARGET_PACKAGE) > $(ARROW_TARGET_PACKAGE).md5sum
-	echo -e "========================================="
-	echo -e ""
-	echo -e "                 \033[1;34m''\033[0m                  "
-	echo -e "           \`\`\`\`\`\033[1;34m.oy.\033[0m\`\`\`\`\`\`\`          "
-	echo -e "        \`\`\`\`\`\`\`\033[1;34m:dMMh.\033[0m\`\`\`\`\`\`\`\`        "
-	echo -e "      \`\`\`\`\`\`\`\033[1;34m.sMMMMMy.\033[0m\`\`\`\`\`\`\`\`\`      "
-	echo -e "    \`\`\`\`\`\`\`\033[1;34m./mMMMMMMMy.\033[0m\`\`\`\`\`\`\`\`\`\`    "
-	echo -e "   \`\`\`\`\`\`\`\033[1;34m-yMMMMMMMMMMy.\033[0m\`\`\`\`\`\`\`\`\`\`   "
-	echo -e "   \`\`\`\`\`\033[1;34m./mMMNNNMMMMMMMy.\033[0m\`\`\`\`\`\`\`\`\`\`  "
-	echo -e "  \`\`\`\`\`\033[1;34m-ymmhMMMMMMhNMMMMs.\033[0m\`\`\`\`\`\`\`\`\`  "
-	echo -e "  \`\`\`\`\033[1;34m./M..\033[0m\`\`\`\`\`\`\`\033[1;34m.-odMMMs.\033[0m\`\`\`\`\`\`\`\`  "
-	echo -e "  \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\033[1;34m./hMMs.\033[0m\`\`\`\`\`\`\`  "
-	echo -e "   \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\033[1;34m./dMs.\033[0m\`\`\`\`\`\`  "
-	echo -e "    \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\033[1;34m.+ms\033[0m\`\`\`\`\`  "
-	echo -e "     \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\033[1;34m-yo\033[0m\`\`\`   "
-	echo -e "      \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\033[1;34m...d\033[0m\`    "
-	echo -e "        \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\` \`\` \033[1;34m.   \033[0m"
-	echo -e "           \`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`          "
-	echo -e ""
-	echo -e "                ArrowOS"
-	echo -e ""
-	echo -e "========================================="
-	echo -e ""
-	@echo "**Package completed"**: $(ARROW_TARGET_PACKAGE)"
 
 ifeq ($(BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE),true)
 name := $(product_name)-ota-retrofit-$(FILE_NAME_TAG)
