@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5475630_dbb10d37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 408
+      },
+      "writtenOn": "2023-04-01T14:40:23Z",
+      "side": 1,
+      "message": "Tested on Realme X3 RMX2083.",
+      "revId": "f6bd47c399a68d66d03a5f9cdefe8d9bd75d45e9",
+      "serverId": "66da7299-18b4-411a-8fa2-12a880778196"
+    }
+  ]
+}
